@@ -17,7 +17,6 @@ switch (lang) {
 daysList = {'ru': 'понедельник, вторник, среда, четверг, пятница, суббота, воскресенье',
             'en': 'Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday'
 }
-
 console.log(daysList[lang]);
 
 let namePerson = 'Максим'
