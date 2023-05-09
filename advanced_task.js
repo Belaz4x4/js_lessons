@@ -1,24 +1,13 @@
-let lang = document.querySelector("html").getAttribute("lang");
+'use strict';
 
-if (lang === 'ru') {
-    console.log('понедельник, вторник, среда, четверг, пятница, суббота, воскресенье');
-} else if (lang === 'en') {
-    console.log('Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday');
-}
+function getCutedString(str, len=30) {
+    if (typeof str === 'string') {
+        str = str.trim()
+        if (str.length > len) {
+            str = str.slice(0, len) + '...'
+        }
+        return str
+    }
+};
 
-switch (lang) {
-    case 'ru':
-        console.log('понедельник, вторник, среда, четверг, пятница, суббота, воскресенье');
-        break
-    case 'en':
-        console.log('Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday');
-}
-
-daysList = {'ru': 'понедельник, вторник, среда, четверг, пятница, суббота, воскресенье',
-            'en': 'Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday'
-}
-console.log(daysList[lang]);
-
-let namePerson = 'Максим'
-let role = namePerson === 'Артем' ? 'директор' : namePerson === 'Максим' ? 'преподаватель' : 'студент';
-console.log(role);
+console.log(getCutedString('Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis similique non veritatis, cumque dignissimos est animi incidunt quia eaque nihil'));
