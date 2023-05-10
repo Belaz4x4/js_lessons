@@ -11,3 +11,4 @@ function getCutedString(str, len=30) {
 };
 
 console.log(getCutedString('Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis similique non veritatis, cumque dignissimos est animi incidunt quia eaque nihil'));
+
