@@ -1,14 +1,24 @@
 'use strict';
 
-function getCutedString(str, len=30) {
-    if (typeof str === 'string') {
-        str = str.trim()
-        if (str.length > len) {
-            str = str.slice(0, len) + '...'
+// First task
+
+let arr = ['165', '265', '5476', '36888', '4586', '212', '325']
+
+arr.forEach((number) => {
+    if (number[0] === '2' || number[0] === '4') console.log(number);
+})
+
+// Second task
+
+for (let i = 1; i <= 100; i++) {
+    let divider = i-1;
+    let isSimpleNumber = true;
+    for (divider; divider > 1; divider--) {
+        if (i % divider === 0) {
+            isSimpleNumber = false;
+            break;
         }
-        return str
     }
-};
-
-console.log(getCutedString('Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis similique non veritatis, cumque dignissimos est animi incidunt quia eaque nihil'));
-
+    if (isSimpleNumber) console.log(i);
+    
+}
