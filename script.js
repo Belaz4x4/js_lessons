@@ -1,15 +1,15 @@
 'use strict';
 
 let money, 
-    income = 20000, 
+    income      = 20000, 
     addExpenses, 
     deposit,
     expenses1,
     amount1,
     expenses2,
     amount2,
-    mission = 200000, 
-    period = 8;
+    mission     = 200000, 
+    period      = 8;
 
 function inputNumber(message) {
     let number;
@@ -21,25 +21,29 @@ function inputNumber(message) {
 }
 
 function start() {
-    money = inputNumber('Ваш месячный доход в рублях?');
+    money       = inputNumber('Ваш месячный доход в рублях?');
     addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-    deposit = confirm('Есть ли у вас депозит в банке?');
-    expenses1 = prompt('Введите обязательную статью расходов.')
-    amount1 = inputNumber('Во сколько это обойдется?');
-    expenses2 = prompt('Введите обязательную статью расходов.');
-    amount2 = inputNumber('Во сколько это обойдется?');
+    deposit     = confirm('Есть ли у вас депозит в банке?');
+    expenses1   = prompt('Введите обязательную статью расходов.')
+    amount1     = inputNumber('Во сколько это обойдется?');
+    expenses2   = prompt('Введите обязательную статью расходов.');
+    amount2     = inputNumber('Во сколько это обойдется?');
 }
 
 function getStatusIncome(budgetDay) {
-    if (budgetDay > 1200) {
+    if (budgetDay > 1200) 
+    {
         return'У вас высокий уровень дохода';
-    } else if (budgetDay <= 1200 && budgetDay >= 600 ) {
+    } else if (budgetDay <= 1200 && budgetDay >= 600 ) 
+    {
         return'У вас средний уровень дохода';
-    } else if (budgetDay < 600) {
+    } else if (budgetDay < 600) 
+    {
         return'К сожалению у вас уровень дохода ниже среднего';
-    } else {
+    } else 
+    {
         return'Что то пошло не так';
-}
+    }
 }
 
 function getExpensesMonth(...expenses) {
@@ -56,8 +60,8 @@ function showTypeOf(...items) {
     })
 }
 
-const getAccumulatedMonth = function (income, expenses) {
-    return income - expenses
+const getAccumulatedMonth = function (gain, expenses) {
+    return gain - expenses
 };
 
 const getTargetMonth = (mission, accumulated) => {

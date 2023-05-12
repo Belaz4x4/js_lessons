@@ -2,7 +2,7 @@
 
 // First task
 
-let arr = ['165', '265', '5476', '36888', '4586', '212', '325']
+let arr = ['165', '265', '5476', '36888', '4586', '212', '325'];
 
 arr.forEach((number) => {
     if (number[0] === '2' || number[0] === '4') console.log(number);
