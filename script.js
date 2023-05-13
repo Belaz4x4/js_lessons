@@ -1,91 +1,75 @@
 'use strict';
 
-let money, 
-    income      = 20000, 
-    addExpenses, 
-    deposit,
-    expenses1,
-    amount1,
-    expenses2,
-    amount2,
-    mission     = 200000, 
-    period      = 8;
+function game(minNumber, maxNumber, tryesAmount) {
+    let agreement = confirm(`Я загадал число от ${minNumber} до ${maxNumber}. Хотите его угадать?`);
 
-function inputNumber(message) {
-    let number;
-    do {
-        number = parseFloat(prompt(message).trim());
-    } while (isNaN(number))
 
-    return number
-}
+    if (agreement) {
+        let hiddenNumber    = Math.floor(Math.random() * (maxNumber - minNumber)) + minNumber,
+            roundsCount     = tryesAmount;
 
-function start() {
-    money       = inputNumber('Ваш месячный доход в рублях?');
-    addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-    deposit     = confirm('Есть ли у вас депозит в банке?');
-    expenses1   = prompt('Введите обязательную статью расходов.')
-    amount1     = inputNumber('Во сколько это обойдется?');
-    expenses2   = prompt('Введите обязательную статью расходов.');
-    amount2     = inputNumber('Во сколько это обойдется?');
-}
+        alert(`У вас ${tryesAmount} попыток`)
 
-function getStatusIncome(budgetDay) {
-    if (budgetDay > 1200) 
-    {
-        return'У вас высокий уровень дохода';
-    } else if (budgetDay <= 1200 && budgetDay >= 600 ) 
-    {
-        return'У вас средний уровень дохода';
-    } else if (budgetDay < 600) 
-    {
-        return'К сожалению у вас уровень дохода ниже среднего';
-    } else 
-    {
-        return'Что то пошло не так';
+        function gameRound() {
+            if (roundsCount === 0) 
+            {
+                playMore = confirm('Попытки закончились, хотите сыграть еще?');
+                if(playMore) 
+                {
+                    return game(minNumber, maxNumber, tryesAmount) // почему я не могу вернуть родительскую функцию, если ее имя есть в глобальной области видимости?
+                } else 
+                {
+                    alert('Игра окончена. Спасибо за игру.')
+                }
+                
+            } else
+            {
+                let usersAnswer = getUsersAnswer(`Введите целое число от ${minNumber} до ${maxNumber}.\nЕсли не хотите продолжать, нажмите "отмена".`, minNumber, maxNumber); // как сделать перенос строки в коде без переноса строки в модальном окне?
+                                                
+                if (usersAnswer === 'exit') 
+                {
+                    alert('Игра окончена. Спасибо за игру.')
+                } else if (usersAnswer === hiddenNumber) 
+                {
+                    alert('Поздравляю, вы угадали!!!')
+                } else if (usersAnswer < hiddenNumber) 
+                {
+                    roundsCount--
+                    alert(`Загаданное число больше. Осталось попыток: ${tryesAmount}`)
+                    return gameRound()
+                } else
+                {
+                    roundsCount--
+                    alert(`Загаданное число меньше. Осталось попыток: ${tryesAmount}`)
+                    return gameRound()
+                }
+            }
+        }
+       
+        return gameRound
     }
 }
 
-function getExpensesMonth(...expenses) {
-    let sum = 0;
-    expenses.forEach((item) => {
-        sum += item
-    })
-    return sum
+function getUsersAnswer(message, minNumber, lastNumer) {
+    let answer = prompt(message);
+
+    if (answer === null) {
+        return 'exit';
+    } else {
+        answer = +answer.trim();
+        if (isNaN(answer) || answer < minNumber || answer > lastNumer) {
+            alert('Введено неверное значение!')
+            return getUsersAnswer(message, minNumber, lastNumer)
+        } else {
+            return answer
+        }
+    }
 }
 
-function showTypeOf(...items) {
-    items.forEach((item) => {
-        console.log(typeof item);
-    })
-}
+let firstGame = game(1, 10, 5);
 
-const getAccumulatedMonth = function (gain, expenses) {
-    return gain - expenses
-};
+firstGame()
 
-const getTargetMonth = (mission, accumulated) => {
-    let monthAmount = Math.ceil(mission / accumulated);
+let secondGame = game(1, 100, 10);
 
-    return monthAmount > 0 ? monthAmount : 'Цель не будет достигнута'
-}
-
-start()
-
-showTypeOf(money, income, deposit);
-
-let monthExpenses = getExpensesMonth(amount1, amount2);
-console.log(`Расходы за  месяц: ${monthExpenses}`);
-
-// console.log(`Возможные расходы: ${addExpenses.split(', ')}`);
-console.log(addExpenses.split(', '));
-
-let accumulatedMonth = getAccumulatedMonth(money, monthExpenses);
-let monthToTarget = getTargetMonth(mission, accumulatedMonth);
-console.log(`Месяцев до цели: ${monthToTarget}`);
-
-let budgetDay = Math.floor(accumulatedMonth / 30)
-console.log(`Дневной бюджет: ${budgetDay}`);
-
-let statusIncome = getStatusIncome(budgetDay)
-console.log(statusIncome);
+secondGame();
