@@ -25,7 +25,7 @@ function game(minNumber, maxNumber, tryesAmount) {
         hiddenNumber    = Math.floor(Math.random() * (maxNumber - minNumber)) + minNumber,
         roundsCount     = tryesAmount;
 
-        alert(`У вас ${tryesAmount} попыток`)
+        alert(`У вас ${roundsCount} попыток`)
     }
 
     function gameRound() {
@@ -45,10 +45,10 @@ function game(minNumber, maxNumber, tryesAmount) {
                 playAgain('Поздравляю, вы угадали!!! Хотите сыграть еще?')
             } else if (usersAnswer < hiddenNumber) 
             {
-                nextRound(`Загаданное число больше. Осталось попыток: ${roundsCount - 1}`)
+                nextRound('больше')
             } else
             {
-                nextRound(`Загаданное число меньше. Осталось попыток: ${roundsCount - 1}`)
+                nextRound('меньше')
             }
         }
     }
@@ -65,9 +65,9 @@ function game(minNumber, maxNumber, tryesAmount) {
         }
     }
 
-    function nextRound(message) {
+    function nextRound(condition) {
         --roundsCount
-        alert(message)
+        alert(`Загаданное число ${condition}. Осталось попыток: ${roundsCount}`)
         return gameRound()
     }
 
@@ -82,9 +82,9 @@ function game(minNumber, maxNumber, tryesAmount) {
 
 
 
-// let firstGame = game(1, 10, 3);
+// let testGame = game(1, 10, 3);
 
-// firstGame()
+// testGame()
 
 let secondGame = game(1, 100, 10);
 
