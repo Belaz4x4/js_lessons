@@ -1,24 +1,20 @@
 'use strict';
 
-// First task
+let date        = new Date,
+    currentDay   = date.getDay(),
+    cnt = 1,
+    week = ['Monday', 'Tuesday', 'Wednesday', 'Thurshday', 'Friday', 'Saturday', 'Sunday'];
 
-let arr = ['165', '265', '5476', '36888', '4586', '212', '325'];
-
-arr.forEach((number) => {
-    if (number[0] === '2' || number[0] === '4') console.log(number);
-})
-
-// Second task
-
-for (let i = 1; i <= 100; i++) {
-    let divider = i-1;
-    let isSimpleNumber = true;
-    for (divider; divider > 1; divider--) {
-        if (i % divider === 0) {
-            isSimpleNumber = false;
-            break;
-        }
+for (let day of week) {
+    if (cnt === currentDay) 
+    {
+        console.log(day.bold())
+    } else if (cnt >= 6) 
+    {
+        console.log(day.italics())
+    }else {
+        console.log(day);
     }
-    if (isSimpleNumber) console.log(i);
-    
+
+    ++cnt
 }
