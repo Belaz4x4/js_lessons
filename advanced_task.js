@@ -18,3 +18,4 @@ for (let day of week) {
 
     ++cnt
 }
+  
