@@ -1,6 +1,23 @@
 'use strict';
 
-
+let start                   = document.getElementById('start'),
+    addIncomePlus           = document.getElementsByTagName('button')[0],
+    addExpensesPlus         = document.getElementsByTagName('button')[1],
+    depositCheck            = document.querySelector('#deposit-check'),
+    additionalIncomeItems   = document.querySelectorAll('.additional_income-item'),
+    budgetMonthValue        = document.querySelector('.budget_month-value'),
+    bugetDayValue           = document.getElementsByClassName('budget_day-value'),
+    expencesMonthValue      = document.getElementsByClassName('expenses_month-value'),
+    addIncomeValue          = document.getElementsByClassName('additional_income-value'),
+    incomePeriodValue       = document.getElementsByClassName('income_period-value'),
+    targetMonthValue        = document.getElementsByClassName('target_month-value'),
+    salaryAmount            = document.querySelector('.salary-amount'),
+    targetAmount            = document.querySelector('.target-amount'),
+    expenses                = document.querySelectorAll('.expenses-title'),
+    expensesAmount          = document.querySelectorAll('.expenses-amount'),
+    addExpenses             = document.querySelector('.additional_expenses-item'),
+    periodSelect            = document.querySelector('.period-select');
+    
 
 function inputNumber(message, defaultValue) {
     let number;
@@ -50,6 +67,19 @@ let appData = {
     expensesMonth: 0,
     targetMonth: 0,
     
+    start: function () {
+        if (salaryAmount.value === '') {
+            alert('Введите месячный доход!');
+            return
+        };
+        appData.budget = salaryAmount.value;
+        console.log('appData.budget: ', appData.budget);
+
+        // appData.asking();
+        // appData.getExpensesMonth();
+        // appData.getBudget();
+    },
+
     asking: () => {
         appData.budget      = inputNumber('Ваш месячный доход в рублях?', 50000);
         if (confirm('У вас есть дополнительный доход?')) 
@@ -127,8 +157,19 @@ let appData = {
 
     calcSavedMoney: function () {
         return appData.budgetMonth * appData.period;
-    }
+    },
+
+    addExpensesBlock: function () {
+        let expensesItems = document.querySelectorAll('.expenses-items');
+        let newItem = expensesItems[expensesItems.length - 1].cloneNode(true);
+        expensesItems[expensesItems.length - 1].after(newItem);
+
+    },
 };
+
+start.addEventListener('click', appData.start);    
+
+addExpensesPlus.addEventListener('click', appData.addExpensesBlock);
 
 // appData.asking()
 // appData.getInfoDeposit()
@@ -167,25 +208,5 @@ let appData = {
 //     }  
 // }
 
-let calculate               = document.getElementById('start'),
-    btnPlus1                = document.getElementsByTagName('button')[0],
-    btnPlus2                = document.getElementsByTagName('button')[1],
-    depositCheck            = document.querySelector('#deposit-check'),
-    additionalIncomeItems   = document.querySelectorAll('.additional_income-item'),
-    budgetMonthValue        = document.querySelector('.budget_month-value'),
-    bugetDayValue           = document.getElementsByClassName('budget_day-value'),
-    expencesMonthValue      = document.getElementsByClassName('expenses_month-value'),
-    addIncomeValue          = document.getElementsByClassName('additional_income-value'),
-    incomePeriodValue       = document.getElementsByClassName('income_period-value'),
-    targetMonthValue        = document.getElementsByClassName('target_month-value'),
-    salaryAmount            = document.querySelector('.salary-amount'),
-    targetAmount            = document.querySelector('.target-amount'),
-    expenses                = document.querySelectorAll('.expenses-title'),
-    expensesAmount          = document.querySelectorAll('.expenses-amount'),
-    addExpenses             = document.querySelector('.additional_expenses-item'),
-    periodSelect            = document.querySelector('.period-select');
-    
 
 
-
-console.log(periodSelect);
