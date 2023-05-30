@@ -1,0 +1,14 @@
+function setCookie(key, value, year, month, day, path, domain, secure) {
+    let cookieStr = key + '=' + value;
+    if (year) {
+        const expires = new Date(year, month-1, day);
+        cookieStr += '; expires=' + expires.toGMTString();
+
+    };
+
+    cookieStr += path ? '; path=' + path : '';
+    cookieStr += domain ? '; domain=' + domain : '';
+    cookieStr += secure ? '; secure' : '';
+
+    document.cookie = cookieStr;
+}
